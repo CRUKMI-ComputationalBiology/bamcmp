@@ -1,0 +1,37 @@
+Please install htslib (http://www.htslib.org) before you run make
+in the bamcmp folder to create the bamcmp executable located in the
+build folder. The executable is relocatable once successfully
+compiled.
+
+The default location for htslib is /usr/local. Especially in
+Red Hat based distributions /usr/local is not a default path
+for libraries. Hence, you have to use LD_LIBRARY_PATH to set
+the right library path for  bamcmp. Please add the following
+line to your $HOME/.bashrc or $HOME/.bash_profile
+
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/local/lib
+
+Please source the $HOME/.bashrc or $HOME/.bash_profile file after
+you have made the changes.
+
+E.g.:
+
+source ~/.bashrc
+
+### If htslib isn't installed in a standard location
+
+Please set the environment variable $HTSLIBDIR to the proper folder
+before running make, if the htslib is not installed in the standard
+location and adapt your $LD_LIBRARY_PATH accordingly.
+
+E.g.
+
+export HTSLIBDIR=/nonstandard/htslib
+cd bamcmp/
+make
+
+Add the following line to you $HOME/.bashrc:
+
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/nonstandard/htslib/lib
+
+(/nonstandard/htslib must contain the include/ and the lib folder)
