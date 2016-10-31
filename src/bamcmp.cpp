@@ -1,3 +1,23 @@
+/*
+bamcmp, A program separates human and non-human DNA or RNA from contaminated
+short reads produced by NGS
+
+Copyright (C) 2016  Christopher Smowton
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 #include <cstdlib>
 #include <iostream>
 #include <vector>
@@ -36,7 +56,18 @@ static void usage()
     fprintf(stderr, "\t-s as\tScore hits according to the AS attribute written by some aligners\n");
     fprintf(stderr, "\t-s mapq\tScore hits according to the MAPQ SAM field\n");
     fprintf(stderr, "\t-s balwayswins\tAlways award hits to input B, regardless of alignment scores (equivalent to filtering A by any read mapped in B)\n");
+    fprintf(stderr, "\n");
     exit(1);
+}
+
+static void disclaimer(std::string pname, std::string pyear, std::string aname)
+{
+  std::cout << std::endl;
+  std::cout << "           " << pname << " Copyright (C) " << pyear  << " " << aname << std::endl;
+  std::cout << "This program comes with ABSOLUTELY NO WARRANTY; for details check LICENSE file." << std::endl;
+  std::cout << "This is free software, and you are welcome to redistribute it" << std::endl;
+  std::cout << "under certain conditions; check LICENSE file for details." << std::endl;
+  std::cout << std::endl;
 }
 
 static bool aux_is_int(uint8_t* rec)
@@ -241,6 +272,9 @@ static void clearMateInfo(BamRecVector& v)
 
 int main(int argc, char** argv)
 {
+
+    disclaimer("bamcmp","2016","Christopher Smowton");
+
     char *in1_name = NULL, *in2_name = NULL, *firstbetter_name = NULL, *secondbetter_name = NULL,
           *firstworse_name = NULL, *secondworse_name = NULL, *first_name = NULL, *second_name = NULL;
 
