@@ -20,10 +20,10 @@ OBJS=$(BUILDDIR)SamReader.o $(BUILDDIR)BamRecVector.o \
 	$(BUILDDIR)HTSFileWrapper.o $(BUILDDIR)util.o $(BUILDDIR)bamcmp.o
 
 bamcmp: ${OBJS} $(BUILDDIR)
-	$(CPP) $(LDFLAGS) -o $(BUILDDIR)/bamcmp $(OBJS) -L $(HTSLIBDIR)/lib -l $(LDLIBS)
+	$(CPP) $(LDFLAGS) -o $(BUILDDIR)/bamcmp $(OBJS) -L $(HTSLIBDIR)/lib -l $(LDLIBS) -Wl,-rpath=/usr/local/lib
 
 $(BUILDDIR)%.o: $(SRCDIR)%.cpp $(BUILDDIR)
-	$(CPP) $(CPPFLAGS) -I $(INCDIR) -I $(HTSLIBDIR)/include -o $@ -c $<
+	$(CPP) $(CPPFLAGS) -I $(INCDIR) -I $(HTSLIBDIR)/include -o $@ -c $< 
 
 $(BUILDDIR):
 	mkdir $(BUILDDIR)
